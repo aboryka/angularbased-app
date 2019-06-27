@@ -1,0 +1,9 @@
+<h2>Repertuar</h2>
+<div *ngFor="let movie of movies">
+    {{ movie.title }}
+    <span *ngFor="let time of movie.times">
+      {{ time.filmStarts }}
+      {{ time.filmEnds }}
+    </span>
+    <button>Dodaj do obejrzanych</button>
+  </div>

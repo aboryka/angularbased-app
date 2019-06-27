@@ -1,0 +1,8 @@
+<h2>W dniu dzisiejszym obejrzysz jeszcze: </h2>
+<div *ngFor="let movie of currentMovies">
+  {{ movie.title }}
+  <span *ngFor="let time of movie.times">
+    {{ time.filmStarts }}
+    {{ time.filmEnds }}
+  </span>
+</div>
