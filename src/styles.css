@@ -1,1 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+.c-header {
+  font-size: 20px;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+.c-underline {
+  text-decoration: underline;
+}
+
+.c-title {
+  color: #fff;
+  font-size: 24px;
+}
+
+.c-films {
+  padding: 10px;
+}
+.c-films:nth-child(2n+1) {
+  background-color: #f8f9fa;
+}
+
+.c-films:nth-child(2n){
+  background-color: #ebebeb;
+}
+
+.c-menu_button {
+  background-color: transparent;
+  color: #fff;
+  border-radius: 3px;
+  border: 1px solid #ebebeb;
+}
+
+.c-menu_button:hover{
+  text-decoration: none;
+  border: 1px solid #fff;
+  color: #ebebeb
+}

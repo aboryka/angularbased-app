@@ -1,9 +1,15 @@
-<h2>Repertuar</h2>
-<div *ngFor="let movie of movies">
-    {{ movie.title }}
-    <span *ngFor="let time of movie.times">
+<h2 class="c-header">Repertuar</h2>
+<div
+  class="c-films m-1 py-2 d-flex justify-content-between"
+  *ngFor="let movie of movies"
+>
+  <div class="mr-2">
+    <div>{{ movie.title }}</div>
+    <div class="btn btn-primary mx-1 p-1" *ngFor="let time of movie.times">
       {{ time.filmStarts }}
-      {{ time.filmEnds }}
-    </span>
-    <button>Dodaj do obejrzanych</button>
+    </div>
   </div>
+  <button class="btn btn-success mx-1" (click)="addToWatchList(movie)">
+    Chcę zobaczyć
+  </button>
+</div>
