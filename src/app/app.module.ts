@@ -5,13 +5,15 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CurrentMoviesComponent } from './current-movies/current-movies.component';
 import { MoviesComponent } from './movies/movies.component';
+import { MoviesToWatchComponent } from './movies-to-watch/movies-to-watch.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CurrentMoviesComponent,
-    MoviesComponent
+    MoviesComponent,
+    MoviesToWatchComponent
   ],
   imports: [
     BrowserModule
