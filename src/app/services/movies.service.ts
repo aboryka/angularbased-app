@@ -1,12 +1,16 @@
 import { Injectable } from "@angular/core";
+import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class MoviesService {
-  constructor() {}
+  constructor() {
+    console.log(this.movies)
+    this.sortByname();
+  }
 
-  movies: Array<any> = [
+  private movies: Array<any> = [
     {
       title: "Szybcy i wściekli",
       times: [
@@ -70,4 +74,55 @@ export class MoviesService {
       actors: []
     }
   ];
+
+  sortByname(){
+    this.movies.sort((a,b) => {
+      if (a.title < b.title) {
+        return -1;
+      } else if (a.title > b.title) {
+        return 1;
+      } else {
+        return 0;
+      }
+    })
+  }
+
+  private moviesToWatch: Array<any> = [];
+  private moviesToWatchObs = new BehaviorSubject<Array<any>>(
+    this.moviesToWatch
+  );
+
+  private moviesObs = new BehaviorSubject<Array<any>>(
+    this.movies
+  );
+
+  addToWatchList(movie: Array<any>): void {
+    if (this.checkWatchList(movie)) {
+      this.moviesToWatch.push(movie);
+      this.moviesToWatchObs.next(this.moviesToWatch);
+    }
+  }
+
+  checkWatchList(movie: Array<any>): boolean {
+    let i = this.moviesToWatch.length;
+    while (i--) {
+      if (this.moviesToWatch[i] === movie) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  removeFromWatchList(movie: Array<any>): void {
+    this.moviesToWatch = this.moviesToWatch.filter(m => m !== movie);
+    this.moviesToWatchObs.next(this.moviesToWatch);
+  }
+
+  getMoviesToWatchObs(): Observable<Array<any>> {
+    return this.moviesToWatchObs.asObservable();
+  }
+
+  getMoviesObs(): Observable<Array<any>> {
+    return this.moviesObs.asObservable();
+  }
 }
