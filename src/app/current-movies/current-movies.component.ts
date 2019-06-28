@@ -4,10 +4,10 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "app-current-movies",
   templateUrl: "./current-movies.component.html",
-  styleUrls: ["./current-movies.component.css"]
+  styleUrls: ["./current-movies.component.css"],
+  providers: [MoviesService]
 })
 export class CurrentMoviesComponent implements OnInit {
-
 
   constructor(private moviesService: MoviesService) {
     this.time = new Date();
@@ -21,7 +21,7 @@ export class CurrentMoviesComponent implements OnInit {
   }
 
   checkmoviesAvailability() {
-    this.currentMovies = this.moviesService.movies.filter(movie => {
+    this.currentMovies = this.moviesService.getMovies().filter(movie => {
       const availibilities = movie.times.filter(availability => {
         if (this.checkTimeRange(availability.filmStarts) === true) {
           return (movie.times = Array.of(availability));

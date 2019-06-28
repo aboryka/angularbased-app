@@ -6,10 +6,17 @@ import { Component } from '@angular/core';
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css']
 })
-export class MoviesComponent {
+export class MoviesComponent{
 
-  constructor(private moviesService: MoviesService) { }
 
-  movies: Array<any> = this.moviesService.movies;
+  constructor(private moviesService: MoviesService) {
+  }
+
+
+  movies: Array<any> = this.moviesService.getMovies();
+
+  addToWatchList(movie: Array<any>): void{
+    this.moviesService.addToWatchList(movie);
+  }
 
 }

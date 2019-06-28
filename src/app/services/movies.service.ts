@@ -92,10 +92,6 @@ export class MoviesService {
     this.moviesToWatch
   );
 
-  private moviesObs = new BehaviorSubject<Array<any>>(
-    this.movies
-  );
-
   addToWatchList(movie: Array<any>): void {
     if (this.checkWatchList(movie)) {
       this.moviesToWatch.push(movie);
@@ -122,7 +118,7 @@ export class MoviesService {
     return this.moviesToWatchObs.asObservable();
   }
 
-  getMoviesObs(): Observable<Array<any>> {
-    return this.moviesObs.asObservable();
+  getMovies(){
+    return this.movies;
   }
 }
