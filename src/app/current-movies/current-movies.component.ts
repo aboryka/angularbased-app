@@ -16,17 +16,21 @@ export class CurrentMoviesComponent implements OnInit {
   time: Date;
   currentMovies: Array<any>;
 
+  avail = [];
+
   ngOnInit(): void {
+    this.moviesService.sortByTime();
     this.checkmoviesAvailability();
   }
-
   checkmoviesAvailability() {
     this.currentMovies = this.moviesService.getMovies().filter(movie => {
+      this.avail = []
       const availibilities = movie.times.filter(availability => {
         if (this.checkTimeRange(availability.filmStarts) === true) {
-          return (movie.times = Array.of(availability));
+          return this.avail.push(availability)
         }
       });
+      movie.times = this.avail;
       return availibilities.length;
     });
     return this.currentMovies;
