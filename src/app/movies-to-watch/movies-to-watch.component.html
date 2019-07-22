@@ -7,5 +7,6 @@
 </ng-container>
 
 <ng-template #noMoviesToWatch>
-  <p>Brak dodanych filmów do obejrzenia</p>
+  <p *ngIf="user">Brak dodanych filmów do obejrzenia</p>
+  <p *ngIf="!user">Zaloguj się, aby dodawać pozycje do listy</p>
 </ng-template>
