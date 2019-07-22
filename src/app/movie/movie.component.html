@@ -1,0 +1,24 @@
+<div class="container">
+  <h2 class="c-header">
+    {{ movie.title }}
+  </h2>
+  <div class="my-1">{{ movie.filmLength }}</div>
+  <div class="mt-3">
+    {{ movie.description }}
+  </div>
+  <div class="mt-3">
+    <div>
+      <span class="c-text-detail font-weight-bold">Reżyseria:</span> {{ movie.director }}
+    </div>
+    <div>
+      <span class="c-text-detail font-weight-bold">Scenariusz:</span> {{ movie.scenario }}
+    </div>
+    <div>
+        <span class="c-text-detail font-weight-bold">Gatunek:</span> {{ movie.filmGenre }}
+    </div>
+    <div>
+        <span class="c-text-detail font-weight-bold">Obsada:</span> {{ movie.actors }}
+    </div>
+  </div>
+  <div class="mt-3 font-weight-bold">Seanse: <span class="btn d-inline-block m-1 p-1 btn-primary btn-sm" *ngFor="let time of movie.times">{{ time.filmStarts }}</span></div>
+</div>
