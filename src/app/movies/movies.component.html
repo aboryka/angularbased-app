@@ -1,15 +1,35 @@
-<h2 class="c-header">Repertuar</h2>
-<div
-  class="c-films m-1 py-2 d-flex justify-content-between"
-  *ngFor="let movie of movies"
->
-  <div class="mr-2">
-    <div>{{ movie.title }}</div>
-    <div class="btn btn-primary mx-1 p-1" *ngFor="let time of movie.times">
-      {{ time.filmStarts }}
+<div class="container">
+  <div class="row">
+    <div class="col-8 my-2">
+      <h2 class="c-header">Repertuar</h2>
+      <div class="c-films-container">
+        <div
+          class="c-films py-3 d-flex justify-content-between align-items-end"
+          *ngFor="let movie of movies; let i = index"
+        >
+          <div class="mr-2">
+            <span class="d-block">{{ movie.title }}</span>
+            <span class="btn btn-primary btn-sm mx-1 p-1" *ngFor="let time of movie.times">
+              {{ time.filmStarts }}
+            </span>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button
+              class="btn btn-link p-1 mx-1"
+              (click)="showDetails(movie.id)"
+            >
+              Zobacz szczegóły
+            </button>
+
+            <button class="btn btn-success p-1 mx-1" (click)="addToWatchList(movie, movie.id, i)">
+              Dodaj do obejrzenia
+            </button>
+            <span class="c-watch-list_show" *ngIf="!user" [hidden]="!watchListClicked[movie.id]">Zaloguj się, aby dodawać filmy do swojej listy.</span>
+            <span class="c-watch-list_show" *ngIf="user" [hidden]="!watchListClicked[movie.id]">Film dodano do listy</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <button class="btn btn-success mx-1" (click)="addToWatchList(movie)">
-    Chcę zobaczyć
-  </button>
 </div>
