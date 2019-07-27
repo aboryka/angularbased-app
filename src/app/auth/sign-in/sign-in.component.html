@@ -12,8 +12,8 @@
       email
       required
     />
-    <div class="text-warning c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value===''">Pole obowiązkowe.</div>
-    <div class="text-danger c-auth-err" *ngIf="formDate.submitted && !email.valid && email.dirty">Niepoprawny adres e-mail.</div>
+    <small class="text-warning c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value===''">Pole obowiązkowe.</small>
+    <small class="text-danger c-auth-err" *ngIf="formDate.submitted && !email.valid && email.dirty">Niepoprawny adres e-mail.</small>
   </div>
   <div class="form-group">
     <label class="d-inline-block c-label" for="login">Hasło</label>
@@ -27,8 +27,8 @@
       #passwd="ngModel"
       required
     />
-    <div class="text-warning c-auth-err" *ngIf="formDate.submitted && !passwd.valid && passwd.value===''">Pole obowiązkowe.</div>
-    <div class="text-danger py-2 c-auth-err" *ngIf="formDate.submitted && authService.loginErr">{{authService.loginErr}}</div>
+    <small class="text-warning c-auth-err" *ngIf="formDate.submitted && !passwd.valid && passwd.value===''">Pole obowiązkowe.</small>
+    <small class="text-danger py-2 c-auth-err" *ngIf="formDate.submitted && authService.loginErr">{{authService.loginErr}}</small>
   </div>
   <button class="btn btn-primary px-4" type="submit">Zaloguj</button>
 

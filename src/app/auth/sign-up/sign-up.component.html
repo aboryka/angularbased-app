@@ -13,7 +13,7 @@
       required
     />
   </div>
-  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value===''">*Pole obowiązkowe.</small>
+  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value===''">Pole obowiązkowe.</small>
   <small class="text-danger c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value!==''">Niepoprawny adres e-mail.</small>
   <div class="form-group">
     <label class="c-label" for="inputPassword">Hasło</label>
@@ -30,7 +30,7 @@
     />
   </div>
   <small class="text-danger c-auth-err" *ngIf="formDate.submitted && passwd.errors && passwd.errors.minlength">Hasło musi składać się z co najmniej 6 znaków.</small>
-  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && password===null">*Pole obowiązkowe.</small>
+  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && password===null">Pole obowiązkowe.</small>
   <div class="form-group">
     <label class="c-label" for="inputConfirmaPassword">Powtórz hasło.</label>
     <input
@@ -42,7 +42,7 @@
       placeholder="Powtórz hasło"
       required
     />
-    <small class="text-warning c-auth-err" *ngIf="formDate.submitted && confirmPassword===null">*Pole obowiązkowe.</small>
+    <small class="text-warning c-auth-err" *ngIf="formDate.submitted && confirmPassword===null">Pole obowiązkowe.</small>
     <small class="text-danger c-auth-err" *ngIf="password && confirmPassword && !matchPasswd()">
         Hasła nie są takie same.
     </small>
