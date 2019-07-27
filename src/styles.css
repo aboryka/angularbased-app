@@ -25,7 +25,7 @@
 .c-title-background {
   position: absolute;
   z-index: 1;
-  width: 400px;
+  width: 100vw;
   height: 80px;
   top: -15px;
   right: -50px;
