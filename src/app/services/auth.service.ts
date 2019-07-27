@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   user: User;
+  loginErr: string;
+  registerErr: string;
 
   constructor(private angularFire: AngularFireAuth, private router: Router) {
     angularFire.authState.subscribe(user => {
@@ -17,19 +19,29 @@ export class AuthService {
    }
 
   login(email: string, password: string){
+    this.loginErr = '';
+
     this.angularFire.auth.signInWithEmailAndPassword(email, password).then(user => {
       this.router.navigate(['/home']);
     }).catch(err => {
-      console.log(err);
+      if(err.code==="auth/invalid-email" || err.code==="auth/wrong-password")
+        {this.loginErr = 'Email lub hasło są nieprawidłowe.';}
+        else {
+          this.loginErr = "Wystąpił nieoczekiwany błąd, spróbuj zalogować się ."
+        }
     });
 
   }
 
   signup(email: string, password: string) {
+    this.registerErr = '';
+
     this.angularFire.auth.createUserWithEmailAndPassword(email, password).then(user => {
-      console.log(user);
+      this.router.navigate(['/home']);
     }).catch(err => {
-      console.log(err);
+      if(err.code === "auth/email-already-in-use") {
+        this.registerErr = "Użytkownik o podanym adresie email istnieje.";
+      }
     });
   }
 

@@ -34,6 +34,9 @@
 }
 
 
+.c-auth-err{
+  display: block;
+}
 
 .c-films {
   padding: 10px;

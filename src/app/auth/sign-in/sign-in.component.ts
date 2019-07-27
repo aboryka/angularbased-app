@@ -9,9 +9,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignInComponent {
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
-
+  wrongPasswd: boolean;
+  check(formDate: NgForm) {
+    console.log(formDate)
+  }
   login(formData: NgForm){
     this.authService.login(formData.value.email, formData.value.password);
   }

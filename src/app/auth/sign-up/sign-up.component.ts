@@ -8,7 +8,7 @@ import { AuthService } from "src/app/services/auth.service";
   styleUrls: ["./sign-up.component.css"]
 })
 export class SignUpComponent {
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
   password: string = null;
   confirmPassword: string = null;
@@ -21,6 +21,5 @@ export class SignUpComponent {
     if (this.matchPasswd()) {
       this.authService.signup(formData.value.email, formData.value.password);
     }
-    console.log(this.matchPasswd())
   }
 }

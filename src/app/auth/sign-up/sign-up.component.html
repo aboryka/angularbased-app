@@ -8,9 +8,13 @@
       name="email"
       id="register-email"
       placeholder="Wprowadź adres email"
+      #email="ngModel"
+      email
       required
     />
   </div>
+  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value===''">*Pole obowiązkowe.</small>
+  <small class="text-danger c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value!==''">Niepoprawny adres e-mail.</small>
   <div class="form-group">
     <label class="c-label" for="inputPassword">Hasło</label>
     <input
@@ -20,11 +24,15 @@
       id="inputPassword"
       [(ngModel)]="password"
       placeholder="Podaj hasło"
+      minlength="6"
+      #passwd="ngModel"
       required
     />
   </div>
+  <small class="text-danger c-auth-err" *ngIf="formDate.submitted && passwd.errors && passwd.errors.minlength">Hasło musi składać się z co najmniej 6 znaków.</small>
+  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && password===null">*Pole obowiązkowe.</small>
   <div class="form-group">
-    <label class="c-label" for="inputConfirmaPassword">Powtórz hasło</label>
+    <label class="c-label" for="inputConfirmaPassword">Powtórz hasło.</label>
     <input
       class="c-input"
       name="confirmPassword"
@@ -34,13 +42,14 @@
       placeholder="Powtórz hasło"
       required
     />
-    <div class="text-danger" *ngIf="password && confirmPassword && !matchPasswd()">
-        Hasła nie są takie same
-      </div>
+    <small class="text-warning c-auth-err" *ngIf="formDate.submitted && confirmPassword===null">*Pole obowiązkowe.</small>
+    <small class="text-danger c-auth-err" *ngIf="password && confirmPassword && !matchPasswd()">
+        Hasła nie są takie same.
+    </small>
   </div>
 
-
-    <button class="btn btn-primary" type="button" (click)="signUp(formDate)">
+<small class="text-danger py-2 c-auth-err" *ngIf="formDate.submitted && authService.registerErr">{{authService.registerErr}}</small>
+    <button class="btn btn-primary" type="submit" (click)="signUp(formDate)">
       Rejestracja
     </button>
 
