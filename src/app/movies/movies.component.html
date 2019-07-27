@@ -22,11 +22,11 @@
               Zobacz szczegóły
             </button>
 
-            <button class="btn btn-success p-1 mx-1" (click)="addToWatchList(movie, movie.id, i)">
+            <button class="btn btn-success p-1 mx-1" (click)="addToWatchList(movie.title, i)">
               Dodaj do obejrzenia
             </button>
-            <span class="c-watch-list_show" *ngIf="!user" [hidden]="!watchListClicked[movie.id]">Zaloguj się, aby dodawać filmy do swojej listy.</span>
-            <span class="c-watch-list_show" *ngIf="user" [hidden]="!watchListClicked[movie.id]">Film dodano do listy</span>
+            <span class="c-watch-list_show" *ngIf="!user" [hidden]="!watchListClicked[i]">Zaloguj się, aby dodawać filmy do swojej listy.</span>
+            <span class="c-watch-list_show" *ngIf="user" [hidden]="!watchListClicked[i]">Film dodano do listy</span>
           </div>
         </div>
       </div>

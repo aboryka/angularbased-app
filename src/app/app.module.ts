@@ -15,6 +15,7 @@ import { MoviesToWatchComponent } from './movies-to-watch/movies-to-watch.compon
 import { MovieComponent } from './movie/movie.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FormsModule } from '@angular/forms';
 
 const firebaseConfig = {
@@ -26,6 +27,7 @@ const firebaseConfig = {
   messagingSenderId: "357149638598",
   appId: "1:357149638598:web:5e728df1bf68f904"
 };
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ const firebaseConfig = {
     SignInComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, FormsModule, AngularFireModule.initializeApp(firebaseConfig), AngularFireAuthModule
+    BrowserModule, AppRoutingModule, FormsModule, AngularFireModule.initializeApp(firebaseConfig), AngularFireDatabaseModule, AngularFireAuthModule
   ],
   providers: [MoviesService, MovieService, AuthService],
   bootstrap: [AppComponent]

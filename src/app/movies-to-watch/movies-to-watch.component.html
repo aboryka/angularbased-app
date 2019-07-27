@@ -1,8 +1,8 @@
 
 <ng-container *ngIf="moviesToWatch.length > 0; else noMoviesToWatch">
     <div class="m-1 d-flex justify-content-between" *ngFor="let movie of moviesToWatch">
-        {{movie.title}}
-        <button class="btn btn-danger mx-1" (click)="removeFromWatchList(movie)">Usuń z listy</button>
+        {{movie.text}}
+        <button class="btn btn-danger mx-1" (click)="removeFromWatchList(movie.key)">Usuń z listy</button>
       </div>
 </ng-container>
 

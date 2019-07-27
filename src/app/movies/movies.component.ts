@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { User } from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { Movie } from "../services/movie.service";
 
 @Component({
   selector: "app-movies",
@@ -31,14 +32,14 @@ export class MoviesComponent implements OnInit {
     this.watchListClicked = new Array(this.movies.length);
   }
 
-  addToWatchList(movie: Array<any>, movieId: number, elemIndex: number): void {
-    this.watchListClicked[movieId] = true;
+  addToWatchList(movie: string, elemIndex: number): void {
+    this.watchListClicked[elemIndex] = true;
 
     const tooltip = <HTMLElement>(
       document.getElementsByClassName("c-watch-list_show")[elemIndex]
     );
     this.removeWatchListBtnTooltip(tooltip).then(() => {
-      this.resetWatchListBtn(tooltip, movieId);
+      this.resetWatchListBtn(tooltip, elemIndex);
     });
 
     if (this.user) {
@@ -46,9 +47,9 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  resetWatchListBtn(tooltip: HTMLElement, movieId: number) {
+  resetWatchListBtn(tooltip: HTMLElement, elemIndex: number) {
     setTimeout(() => {
-      this.watchListClicked[movieId] = false;
+      this.watchListClicked[elemIndex] = false;
       tooltip.classList.remove("c-watch-list_hide");
     }, 400);
   }

@@ -1,12 +1,23 @@
-import { Injectable } from "@angular/core";
+import { Injectable, RendererFactory2 } from "@angular/core";
 import { Observable, BehaviorSubject } from "rxjs";
+import { AngularFireList, AngularFireDatabase } from "@angular/fire/database";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { User } from "firebase";
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root"
 })
 export class MoviesService {
-  constructor() {
+  constructor(private db: AngularFireDatabase, private angularFire: AngularFireAuth) {
     this.sortByName();
+    angularFire.authState.subscribe(user => {
+      this.user = user;
+
+      if(user) {
+        this.moviesToWatchConfig();
+      }
+    });
   }
 
   private movies: Array<any> = [
@@ -98,6 +109,10 @@ export class MoviesService {
     }
   ];
 
+  user: User;
+  moviesToWatchObs: Observable<any[]>
+  moviesRef: AngularFireList<any> = null;
+
   sortByName() {
     this.movies.sort((a, b) => {
       if (a.title < b.title) {
@@ -124,35 +139,36 @@ export class MoviesService {
     );
   }
 
-  private moviesToWatch: Array<any> = [];
-  private moviesToWatchObs = new BehaviorSubject<Array<any>>(
-    this.moviesToWatch
-  );
-
-  addToWatchList(movie: Array<any>): void {
-    if (this.checkWatchList(movie)) {
-      this.moviesToWatch.push(movie);
-      this.moviesToWatchObs.next(this.moviesToWatch);
-    }
+  moviesToWatchConfig(): void {
+    this.moviesRef = this.db.list(`movies/${this.user.uid}`);
+    this.moviesToWatchObs = this.moviesRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, text: c.payload.val() }))
+      )
+    );
   }
 
-  checkWatchList(movie: Array<any>): boolean {
-    let i = this.moviesToWatch.length;
-    while (i--) {
-      if (this.moviesToWatch[i] === movie) {
-        return false;
+  addToWatchList(movie: string): void {
+    let movieExist: boolean = false;
+    this.moviesToWatchObs.subscribe(data => {
+      data.forEach(d => {
+        if(movie === d.text) {
+          movieExist = true;
+        }
+      })
+
+      if(!movieExist) {
+        this.moviesRef.push(movie);
       }
-    }
-    return true;
+      })
   }
 
-  removeFromWatchList(movie: Array<any>): void {
-    this.moviesToWatch = this.moviesToWatch.filter(m => m !== movie);
-    this.moviesToWatchObs.next(this.moviesToWatch);
+  removeFromWatchList(key: string): void {
+    this.moviesRef.remove(key);
   }
 
-  getMoviesToWatchObs(): Observable<Array<any>> {
-    return this.moviesToWatchObs.asObservable();
+  getMoviesToWatchObs(): Observable<any[]> {
+    return this.moviesToWatchObs;
   }
 
   getMovies() {
