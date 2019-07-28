@@ -6,7 +6,7 @@ import { User } from "firebase";
 @Component({
   selector: "app-movies-to-watch",
   templateUrl: "./movies-to-watch.component.html",
-  styleUrls: ["./movies-to-watch.component.css"]
+  styleUrls: ["./movies-to-watch.component.scss"]
 })
 export class MoviesToWatchComponent {
   user: User;

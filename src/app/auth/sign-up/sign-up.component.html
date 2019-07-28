@@ -1,8 +1,8 @@
-<form #formDate="ngForm">
+<form class="c-sign-up" #formDate="ngForm">
   <div class="form-group">
-    <label class="c-label" for="register-email">E-mail</label>
+    <label class="c-project__label" for="register-email">E-mail</label>
     <input
-      class="c-input"
+      class="c-project__input"
       ngModel
       type="email"
       name="email"
@@ -13,12 +13,12 @@
       required
     />
   </div>
-  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value===''">Pole obowiązkowe.</small>
-  <small class="text-danger c-auth-err" *ngIf="formDate.submitted && !email.valid && email.value!==''">Niepoprawny adres e-mail.</small>
+  <small class="text-warning d-block" *ngIf="formDate.submitted && !email.valid && email.value===''">Pole obowiązkowe.</small>
+  <small class="text-danger d-block" *ngIf="formDate.submitted && !email.valid && email.value!==''">Niepoprawny adres e-mail.</small>
   <div class="form-group">
-    <label class="c-label" for="inputPassword">Hasło</label>
+    <label class="c-project__label" for="inputPassword">Hasło</label>
     <input
-      class="c-input"
+      class="c-project__input"
       name="password"
       type="password"
       id="inputPassword"
@@ -29,12 +29,12 @@
       required
     />
   </div>
-  <small class="text-danger c-auth-err" *ngIf="formDate.submitted && passwd.errors && passwd.errors.minlength">Hasło musi składać się z co najmniej 6 znaków.</small>
-  <small class="text-warning c-auth-err" *ngIf="formDate.submitted && password===null">Pole obowiązkowe.</small>
+  <small class="text-danger d-block" *ngIf="formDate.submitted && passwd.errors && passwd.errors.minlength">Hasło musi składać się z co najmniej 6 znaków.</small>
+  <small class="text-warning d-block" *ngIf="formDate.submitted && password===null">Pole obowiązkowe.</small>
   <div class="form-group">
-    <label class="c-label" for="inputConfirmaPassword">Powtórz hasło.</label>
+    <label class="c-project__label" for="inputConfirmaPassword">Powtórz hasło.</label>
     <input
-      class="c-input"
+      class="c-project__input"
       name="confirmPassword"
       type="password"
       id="inputConfirmaPassword"
@@ -42,13 +42,13 @@
       placeholder="Powtórz hasło"
       required
     />
-    <small class="text-warning c-auth-err" *ngIf="formDate.submitted && confirmPassword===null">Pole obowiązkowe.</small>
-    <small class="text-danger c-auth-err" *ngIf="password && confirmPassword && !matchPasswd()">
+    <small class="text-warning d-block" *ngIf="formDate.submitted && confirmPassword===null">Pole obowiązkowe.</small>
+    <small class="text-danger d-block" *ngIf="password && confirmPassword && !matchPasswd()">
         Hasła nie są takie same.
     </small>
   </div>
 
-<small class="text-danger py-2 c-auth-err" *ngIf="formDate.submitted && authService.registerErr">{{authService.registerErr}}</small>
+<small class="text-danger py-2 d-block" *ngIf="formDate.submitted && authService.registerErr">{{authService.registerErr}}</small>
     <button class="btn btn-primary" type="submit" (click)="signUp(formDate)">
       Rejestracja
     </button>

@@ -2,69 +2,43 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="d-flex align-items-center justify-content-between">
-            <div class="c-title-container" routerLink="home">
-              <span class="c-title">Cinema<span class="c-text-detail">Stuff</span></span>
-              <div class="c-title-background"></div>
+        <div class="c-menu">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="c-menu__container" routerLink="home">
+              <span class="c-menu__title">Cinema<span class="c-project__text--custom">Stuff</span></span>
+              <div class="c-menu__title--background"></div>
             </div>
-          <div>
-            <div
-              class="c-menu_items d-flex justify-content-end align-items-center"
-            >
-              <button
-                *ngIf="!authService.user"
-                type="button"
-                class="mx-2 p-2 btn btn-light"
-                routerLink="/login"
-              >
-                Logowanie
-              </button>
-              <div *ngIf="authService.user" class="text-white">
-                Witaj: <span class="c-text-detail">{{ authService.user.email }}</span>
-              </div>
-              <button
-                *ngIf="authService.user"
-                (click)="logout()"
-                class="mx-2 p-2 btn btn-light"
-              >
-                Wyloguj
-              </button>
-              <button
-                type="button"
-                class="c-menu-button p-2"
-                data-toggle="modal"
-                data-target="#exampleModal"
-              >
-                Baza filmów do obejrzenia
-                <span class="text-warning" *ngIf="movies.length && user"
-                  >( {{ movies.length }} )</span
-                >
-              </button>
-              <div
-                class="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h2 class="c-header">Baza filmów do obejrzenia</h2>
-                      <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+            <div>
+              <div class="d-flex justify-content-end align-items-center">
+                <button *ngIf="!authService.user" type="button" class="mx-2 p-2 btn btn-light" routerLink="/login">
+                  Logowanie
+                </button>
+                <div *ngIf="authService.user" class="text-white">
+                  Witaj: <span class="c-project__text--custom">{{ authService.user.email }}</span>
+                </div>
+                <button *ngIf="authService.user" (click)="logout()" class="mx-2 p-2 btn btn-light">
+                  Wyloguj
+                </button>
+                <button type="button" class="c-menu__button--custom p-2" data-toggle="modal"
+                  data-target="#moviesToWatch">
+                  Baza filmów do obejrzenia
+                  <span class="text-warning" *ngIf="movies.length && user">( {{ movies.length }} )</span>
+                </button>
+                <div class="modal fade" id="moviesToWatch" tabindex="-1" role="dialog"
+                  aria-labelledby="moviesToWatchLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h2 class="c-project__header">Baza filmów do obejrzenia</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <app-movies-to-watch></app-movies-to-watch>
+                      </div>
+                      <div class="modal-footer"></div>
                     </div>
-                    <div class="modal-body">
-                      <app-movies-to-watch></app-movies-to-watch>
-                    </div>
-                    <div class="modal-footer"></div>
                   </div>
                 </div>
               </div>
@@ -76,7 +50,7 @@
   </div>
 </div>
 <div class="mt-4">
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 
 <div class="bg-dark py-2 c-footer navbar fixed-bottom"></div>

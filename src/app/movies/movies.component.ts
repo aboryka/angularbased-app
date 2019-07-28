@@ -8,7 +8,7 @@ import { Movie } from "../services/movie.service";
 @Component({
   selector: "app-movies",
   templateUrl: "./movies.component.html",
-  styleUrls: ["./movies.component.css"]
+  styleUrls: ["./movies.component.scss"]
 })
 export class MoviesComponent implements OnInit {
   movies: Array<any>;
@@ -36,7 +36,7 @@ export class MoviesComponent implements OnInit {
     this.watchListClicked[elemIndex] = true;
 
     const tooltip = <HTMLElement>(
-      document.getElementsByClassName("c-watch-list_show")[elemIndex]
+      document.getElementsByClassName("c-movies__tooltip--show")[elemIndex]
     );
     this.removeWatchListBtnTooltip(tooltip).then(() => {
       this.resetWatchListBtn(tooltip, elemIndex);
@@ -50,14 +50,14 @@ export class MoviesComponent implements OnInit {
   resetWatchListBtn(tooltip: HTMLElement, elemIndex: number) {
     setTimeout(() => {
       this.watchListClicked[elemIndex] = false;
-      tooltip.classList.remove("c-watch-list_hide");
+      tooltip.classList.remove("c-movies__tooltip--hide");
     }, 400);
   }
 
   removeWatchListBtnTooltip(tooltip: HTMLElement) {
     return new Promise(function(resolve, reject) {
       setTimeout(() => {
-        tooltip.classList.add("c-watch-list_hide");
+        tooltip.classList.add("c-movies__tooltip--hide");
         resolve(tooltip);
       }, 300);
     });
