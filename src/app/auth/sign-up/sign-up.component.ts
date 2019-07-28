@@ -14,7 +14,7 @@ export class SignUpComponent {
   confirmPassword: string = null;
 
   matchPasswd(): boolean {
-    return this.password === this.confirmPassword ? true : false;
+    return (this.password === this.confirmPassword && this.password !== null) ? true : false;
   }
 
   signUp(formData: NgForm) {
