@@ -11,11 +11,7 @@ export class SignInComponent {
 
   constructor(public authService: AuthService) { }
 
-  wrongPasswd: boolean;
-  check(formDate: NgForm) {
-    console.log(formDate)
-  }
-  login(formData: NgForm){
+  login(formData: NgForm): void {
     this.authService.login(formData.value.email, formData.value.password);
   }
 }

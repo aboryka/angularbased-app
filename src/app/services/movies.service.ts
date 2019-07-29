@@ -14,7 +14,7 @@ export class MoviesService {
     angularFire.authState.subscribe(user => {
       this.user = user;
 
-      if(user) {
+      if (user) {
         this.moviesToWatchConfig();
       }
     });
@@ -33,7 +33,7 @@ export class MoviesService {
       filmLength: "1 godzina 55 minut",
       description: "Moonee ma sześć lat i zawadiacki uśmiech, a dni spędza poza domem z paczką przyjaciół. Dom w ich przypadku oznacza motel Magic Castle, wściekle liliowy budynek przypominający kiczowaty pałac z bajki. Mała rozrabiaka, razem ze swoją zbuntowaną mamą, Halley, układają sobie życie w niezwykłym miejscu, w którym przyszło im mieszkać. Nieświadoma coraz bardziej ryzykownych kroków, jakie podejmuje Halley, by opłacić pokój w motelu na kolejny tydzień, Moonee jest najszczęśliwszym dzieckiem na świecie. Całkiem, jakby czerpała energię z wychylającego się zza horyzontu pobliskiego Disneylandu.",
       filmGenre: ["Dramat"],
-      actors: ["Willem Dafoe","Brooklynn Prince","Valeria Cotto", "Bria Vinaite", "Christopher Rivera", "Caleb Landry Jones", "Macon Blair", "Karren Karagulian"],
+      actors: ["Willem Dafoe", "Brooklynn Prince", "Valeria Cotto", "Bria Vinaite", "Christopher Rivera", "Caleb Landry Jones", "Macon Blair", "Karren Karagulian"],
       director: "Sean Baker",
       scenario: ["Sean Baker", "Chris Bergoch"]
     },
@@ -79,7 +79,7 @@ export class MoviesService {
       filmGenre: ["Fantasy", "Przygodowy", "Komedia"],
       actors: ["Johnny Depp", "Geoffrey Rush", "Orlando Bloom", "Keira Knightley", "Jack Davenport"],
       director: "Gore Verbinski",
-      scenario: ["Ted Elliott","Terry Rossio"]
+      scenario: ["Ted Elliott", "Terry Rossio"]
     },
     {
       id: "5",
@@ -113,30 +113,28 @@ export class MoviesService {
   moviesToWatchObs: Observable<any[]>
   moviesRef: AngularFireList<any> = null;
 
-  sortByName() {
+  sortByName(): void {
     this.movies.sort((a, b) => {
-      if (a.title < b.title) {
-        return -1;
-      } else if (a.title > b.title) {
-        return 1;
-      } else {
-        return 0;
-      }
+      return this.sortMovies(a.title, b.title);
     });
   }
 
-  sortByTime() {
+  sortByTime(): void {
     this.movies.forEach(m =>
       m.times.sort((a, b) => {
-        if (a.filmStarts < b.filmStarts) {
-          return -1;
-        } else if (a.filmStarts > b.filmStarts) {
-          return 1;
-        } else {
-          return 0;
-        }
+        return this.sortMovies(a.filmStarts, b.filmStarts);
       })
     );
+  }
+
+  sortMovies(firstElem, secondElem): number {
+    if (firstElem < secondElem) {
+      return -1;
+    } else if (firstElem > secondElem) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   moviesToWatchConfig(): void {
@@ -149,18 +147,18 @@ export class MoviesService {
   }
 
   addToWatchList(movie: string): void {
-    let movieExist: boolean = false;
+    let movieExist = false;
     this.moviesToWatchObs.subscribe(data => {
       data.forEach(d => {
-        if(movie === d.text) {
+        if (movie === d.text) {
           movieExist = true;
         }
-      })
+      });
 
-      if(!movieExist) {
+      if (!movieExist) {
         this.moviesRef.push(movie);
       }
-      })
+    });
   }
 
   removeFromWatchList(key: string): void {
@@ -171,7 +169,7 @@ export class MoviesService {
     return this.moviesToWatchObs;
   }
 
-  getMovies() {
+  getMovies(): Array<any> {
     return this.movies;
   }
 }

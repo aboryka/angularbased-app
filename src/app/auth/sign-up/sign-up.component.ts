@@ -17,7 +17,7 @@ export class SignUpComponent {
     return (this.password === this.confirmPassword && this.password !== null) ? true : false;
   }
 
-  signUp(formData: NgForm) {
+  signUp(formData: NgForm): void {
     if (this.matchPasswd()) {
       this.authService.signup(formData.value.email, formData.value.password);
     }

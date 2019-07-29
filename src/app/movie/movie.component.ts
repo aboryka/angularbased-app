@@ -9,6 +9,7 @@ import { ActivatedRoute, Params } from "@angular/router";
 })
 export class MovieComponent implements OnInit {
   movie: Movie;
+
   ngOnInit() {
     this.route.paramMap.subscribe((param: Params) => {
       this.movie = this.movieService.getMovieById(param.get('id'));

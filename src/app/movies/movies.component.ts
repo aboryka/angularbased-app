@@ -12,7 +12,7 @@ import { Movie } from "../services/movie.service";
 })
 export class MoviesComponent implements OnInit {
   movies: Array<any>;
-  watchListClicked: Array<boolean>;
+  tooltipClicked: Array<boolean>;
   user: User;
 
   constructor(
@@ -24,45 +24,36 @@ export class MoviesComponent implements OnInit {
 
     angularFire.authState.subscribe(user => {
       this.user = user;
+
+      this.tooltipClicked = new Array(this.movies.length);
     });
   }
-
   ngOnInit() {
     this.moviesService.sortByTime();
-    this.watchListClicked = new Array(this.movies.length);
+
   }
 
   addToWatchList(movie: string, elemIndex: number): void {
-    this.watchListClicked[elemIndex] = true;
-
-    const tooltip = <HTMLElement>(
-      document.getElementsByClassName("c-movies__tooltip--show")[elemIndex]
-    );
-    this.removeWatchListBtnTooltip(tooltip).then(() => {
-      this.resetWatchListBtn(tooltip, elemIndex);
-    });
-
+    if (!this.tooltipClicked[elemIndex]) {
+      this.watchListTooltip(elemIndex);
+    }
     if (this.user) {
       this.moviesService.addToWatchList(movie);
     }
   }
 
-  resetWatchListBtn(tooltip: HTMLElement, elemIndex: number) {
+  watchListTooltip(elemIndex: number): void {
+    this.tooltipClicked[elemIndex] = !this.tooltipClicked[elemIndex] ;
+    const tooltip = <HTMLElement>(
+      document.getElementsByClassName("c-movies__tooltip")[elemIndex]
+    );
+
     setTimeout(() => {
-      this.watchListClicked[elemIndex] = false;
-      tooltip.classList.remove("c-movies__tooltip--hide");
-    }, 400);
+      tooltip.classList.toggle("c-movies__tooltip--active");
+    }, 100);
   }
 
-  removeWatchListBtnTooltip(tooltip: HTMLElement) {
-    return new Promise(function(resolve, reject) {
-      setTimeout(() => {
-        tooltip.classList.add("c-movies__tooltip--hide");
-        resolve(tooltip);
-      }, 300);
-    });
-  }
-  showDetails(id: string) {
+  showDetails(id: string): void {
     this.router.navigate(["/movies", id]);
   }
 }

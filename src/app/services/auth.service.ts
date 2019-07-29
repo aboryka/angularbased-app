@@ -18,34 +18,33 @@ export class AuthService {
     })
    }
 
-  login(email: string, password: string){
+  login(email: string, password: string): void {
     this.loginErr = '';
 
     this.angularFire.auth.signInWithEmailAndPassword(email, password).then(user => {
       this.router.navigate(['/home']);
     }).catch(err => {
-      if(err.code==="auth/invalid-email" || err.code==="auth/wrong-password")
-        {this.loginErr = 'Email lub hasło są nieprawidłowe.';}
-        else {
-          this.loginErr = "Wystąpił nieoczekiwany błąd, spróbuj zalogować się ."
-        }
+      if (err.code === "auth/invalid-email" || err.code === "auth/wrong-password") {
+        this.loginErr = 'Email lub hasło są nieprawidłowe.';
+      } else {
+        this.loginErr = "Wystąpił nieoczekiwany błąd, spróbuj zalogować się ."
+      }
     });
-
   }
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string): void {
     this.registerErr = '';
 
     this.angularFire.auth.createUserWithEmailAndPassword(email, password).then(user => {
       this.router.navigate(['/home']);
     }).catch(err => {
-      if(err.code === "auth/email-already-in-use") {
+      if (err.code === "auth/email-already-in-use") {
         this.registerErr = "Użytkownik o podanym adresie email istnieje.";
       }
     });
   }
 
-  logout(){
+  logout(): void {
     this.angularFire.auth.signOut();
   }
 }

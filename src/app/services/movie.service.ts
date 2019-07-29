@@ -9,14 +9,14 @@ import { Observable, of } from "rxjs";
 export class MovieService {
   movies: Array<Movie>;
   constructor(private moviesService: MoviesService) {
-      this.movies = this.moviesService.getMovies();
+    this.movies = this.moviesService.getMovies();
   }
 
   getMovieById(id: any): Movie {
     return this.movies.find(m => m.id === id);
   }
 
-  getMovie(): Observable<Array<Movie>>{
+  getMovie(): Observable<Array<Movie>> {
     return of(this.movies);
   }
 }
@@ -32,5 +32,5 @@ export class Movie {
     public actors: Array<string>,
     public director: string,
     public scenario: Array<string>
-  ) {}
+  ) { }
 }

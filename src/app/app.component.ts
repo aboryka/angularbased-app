@@ -30,17 +30,11 @@ export class AppComponent {
             this.movies = movies;
           });
       }
+
     });
-    if (this.user) {
-      this.moviesService
-        .getMoviesToWatchObs()
-        .subscribe((movies: Array<any>) => {
-          this.movies = movies;
-        });
-    }
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
     this.router.navigate(["/home"]);
   }

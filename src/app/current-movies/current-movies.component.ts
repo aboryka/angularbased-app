@@ -16,18 +16,19 @@ export class CurrentMoviesComponent implements OnInit {
   time: Date;
   currentMovies: Array<any>;
 
-  avail = [];
+  avail: Array<any> = [];
 
   ngOnInit(): void {
     this.moviesService.sortByTime();
     this.checkmoviesAvailability();
   }
-  checkmoviesAvailability() {
+
+  checkmoviesAvailability(): Array<any> {
     this.currentMovies = this.moviesService.getMovies().filter(movie => {
-      this.avail = []
-      const availibilities = movie.times.filter(availability => {
+      this.avail = [];
+      const availibilities = movie.times.filter((availability: { filmStarts: string; filmEnds: string }) => {
         if (this.checkTimeRange(availability.filmStarts) === true) {
-          return this.avail.push(availability)
+          return this.avail.push(availability);
         }
       });
       movie.times = this.avail;
@@ -36,7 +37,7 @@ export class CurrentMoviesComponent implements OnInit {
     return this.currentMovies;
   }
 
-  checkTimeRange(from) {
+  checkTimeRange(from: string): boolean {
     const fromTime = this.dateSetter(from);
     if (+this.time <= +fromTime) {
       return true;
@@ -44,12 +45,16 @@ export class CurrentMoviesComponent implements OnInit {
     return false;
   }
 
-  dateSetter(date) {
+  dateSetter(date: string): Date {
     const [hours, minutes] = date.split(":");
     const currentTime = new Date();
 
+    // tslint:disable-next-line: radix
     currentTime.setHours(parseInt(hours));
+
+    // tslint:disable-next-line: radix
     currentTime.setMinutes(parseInt(minutes));
+
     return currentTime;
   }
 }
