@@ -2,16 +2,18 @@
   <div class="row">
     <div class="col-12 my-2">
       <div class="c-current-movies">
-      <h2 class="c-project__header">W dniu dzisiejszym obejrzysz jeszcze</h2>
-      <div class="bg-light p-2">
-        <div class="m-2 d-flex align-items-center" *ngFor="let movie of currentMovies">
-          {{ movie.title }}
-          <span class="btn c-project__button--custom btn-sm p-1 mx-2" *ngFor="let time of movie.times">
-            {{ time.filmStarts }}
-          </span>
-          <span class="c-current-movies__times">czas trwania: {{ movie.filmLength }}</span>
+        <h2 class="c-project__header">W dniu dzisiejszym obejrzysz jeszcze</h2>
+        <div class="bg-light p-2">
+          <div class="py-2 d-md-flex align-items-center mb-md-0 mb-2" *ngFor="let movie of currentMovies">
+            {{ movie.title }}
+            <div class="d-block d-md-inline-block">
+              <span class="btn c-project__button--custom btn-sm p-1 mx-2" *ngFor="let time of movie.times">
+                {{ time.filmStarts }}
+              </span>
+            </div>
+            <span class="c-current-movies__times d-block d-sm-inline-block">czas trwania: {{ movie.filmLength }}</span>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </div>

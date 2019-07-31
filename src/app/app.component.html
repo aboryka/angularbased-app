@@ -3,23 +3,25 @@
     <div class="row">
       <div class="col-12">
         <div class="c-menu">
-          <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex flex-column flex-md-row align-items-md-start align-items-center justify-content-between">
             <div class="c-menu__container" routerLink="home">
               <span class="c-menu__title">Cinema<span class="c-project__text--custom">Stuff</span></span>
               <div class="c-menu__title--background"></div>
             </div>
-            <div>
-              <div class="d-flex justify-content-end align-items-center">
-                <button *ngIf="!authService.user" type="button" class="mx-2 p-2 btn btn-light" routerLink="/login">
+            <div class="c-menu__container mt-md-0 pt-md-0 mt-4 pt-1">
+              <div class="d-flex flex-lg-row flex-column justify-content-end align-items-end">
+                <button *ngIf="!authService.user" type="button" class="m-2 p-2 btn btn-light" routerLink="/login">
                   Logowanie
                 </button>
-                <div *ngIf="authService.user" class="text-white">
+                <div class="text-right">
+                <span *ngIf="authService.user" class="text-white">
                   Witaj: <span class="c-project__text--custom">{{ authService.user.email }}</span>
-                </div>
-                <button *ngIf="authService.user" (click)="logout()" class="mx-2 p-2 btn btn-light">
+                </span>
+                <button *ngIf="authService.user" (click)="logout()" class="m-2 p-2 btn btn-light">
                   Wyloguj
                 </button>
-                <button type="button" class="c-menu__button--custom p-2" data-toggle="modal"
+              </div>
+                <button type="button" class="c-menu__button--custom m-2 p-2" data-toggle="modal"
                   data-target="#moviesToWatch">
                   Baza filmów do obejrzenia
                   <span class="text-warning" *ngIf="movies.length && user">( {{ movies.length }} )</span>

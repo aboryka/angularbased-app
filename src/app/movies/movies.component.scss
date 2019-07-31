@@ -13,7 +13,10 @@
 
 .c-movies__tooltip {
   position: absolute;
-  left: 100%;
+  z-index: -1;
+  bottom: 60px;
+  right: 15px;
+  left: 10px;
   text-align: center;
   margin-left: 5px;
   min-width: 200px;
@@ -21,14 +24,23 @@
   border-radius: 5px;
   background-color: #343a40;
   color: #ffffff;
-  visibility: 0;
   opacity: 0;
   transition: all 0.5s;
+
+  @media (min-width: 576px) {
+    left: inherit;
+  }
+
+  @media(min-width: 768px) {
+    left: 100%;
+    bottom: inherit;
+    right: inherit;
+  }
 }
 
 .c-movies__tooltip--active {
   opacity: 1;
-  visibility: 1;
+  z-index: 1;
   transition: all 0.5s;
 }
 
