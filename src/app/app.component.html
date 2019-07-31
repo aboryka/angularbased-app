@@ -14,7 +14,7 @@
                   Logowanie
                 </button>
                 <div class="text-right">
-                <span *ngIf="authService.user" class="text-white">
+                <span *ngIf="authService.user" class="text-white d-sm-inline-block d-block">
                   Witaj: <span class="c-project__text--custom">{{ authService.user.email }}</span>
                 </span>
                 <button *ngIf="authService.user" (click)="logout()" class="m-2 p-2 btn btn-light">
