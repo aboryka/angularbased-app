@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-8 my-2">
+      <h2 class="c-project__header">Repertuar</h2>
+      <div class="c-movies">
+        <div class="c-movies__element py-3 d-sm-flex justify-content-between align-items-center"
+          *ngFor="let movie of movies; let i = index">
+          <div class="mr-2 text-sm-left text-center">
+            <span class="d-block p-1">{{ movie.title }}</span>
+            <span class="btn btn-primary btn-sm mx-1 p-1" *ngFor="let time of movie.times">
+              {{ time.filmStarts }}
+            </span>
+          </div>
+
+          <div class="d-flex flex-column justify-content-end">
+            <button class="btn btn-link p-1 mx-1" (click)="showDetails(movie.id)">
+              Zobacz szczegóły
+            </button>
+
+            <button class="btn btn-success p-1 mx-1 c-movies__button--add" (click)="addToWatchList(movie.title, i)">
+              Dodaj do obejrzenia
+            </button>
+            <span class="c-movies__tooltip" *ngIf="!user">Zaloguj się, aby dodawać filmy do swojej listy.
+              <span class="c-movies__tooltip--close" (click)="watchListTooltip(i)">x</span></span>
+            <span class="c-movies__tooltip" *ngIf="user">Film dodano do listy<span
+                class="c-movies__tooltip--close" (click)="watchListTooltip(i)">x</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

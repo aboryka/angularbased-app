@@ -1,14 +1,14 @@
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Component } from "@angular/core";
-import { MoviesService } from "../services/movies.service";
+import { MoviesService } from "./../services/movies.service";
 import { User } from "firebase";
 
 @Component({
-  selector: "app-movies-to-watch",
-  templateUrl: "./movies-to-watch.component.html",
-  styleUrls: ["./movies-to-watch.component.scss"]
+  selector: "app-watch-list",
+  templateUrl: "./watch-list.component.html",
+  styleUrls: ["./watch-list.component.scss"]
 })
-export class MoviesToWatchComponent {
+export class WatchListComponent {
   user: User;
   moviesToWatch = [];
   constructor(

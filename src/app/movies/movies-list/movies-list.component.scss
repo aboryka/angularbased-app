@@ -1,0 +1,54 @@
+.c-movies__element{
+  position: relative;
+  padding: 10px;
+
+  &:nth-child(2n+1) {
+    background-color: #f8f9fa;
+  }
+
+  &:nth-child(2n){
+    background-color: #ebebeb;
+  }
+}
+
+.c-movies__tooltip {
+  position: absolute;
+  z-index: -1;
+  bottom: 60px;
+  right: 15px;
+  left: 10px;
+  text-align: center;
+  margin-left: 5px;
+  min-width: 200px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #343a40;
+  color: #ffffff;
+  opacity: 0;
+  transition: all 0.5s;
+
+  @media (min-width: 576px) {
+    left: inherit;
+  }
+
+  @media(min-width: 768px) {
+    left: 100%;
+    bottom: inherit;
+    right: inherit;
+  }
+}
+
+.c-movies__tooltip--active {
+  opacity: 1;
+  z-index: 1;
+  transition: all 0.5s;
+}
+
+.c-movies__tooltip--close{
+  cursor: pointer;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 20px;
+  color: #343a40;
+}

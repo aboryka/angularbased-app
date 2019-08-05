@@ -22,7 +22,7 @@ export class AuthService {
     this.loginErr = '';
 
     this.angularFire.auth.signInWithEmailAndPassword(email, password).then(user => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/repertuar']);
     }).catch(err => {
       if (err.code === "auth/invalid-email" || err.code === "auth/wrong-password") {
         this.loginErr = 'Email lub hasło są nieprawidłowe.';
@@ -36,7 +36,7 @@ export class AuthService {
     this.registerErr = '';
 
     this.angularFire.auth.createUserWithEmailAndPassword(email, password).then(user => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/repertuar']);
     }).catch(err => {
       if (err.code === "auth/email-already-in-use") {
         this.registerErr = "Użytkownik o podanym adresie email istnieje.";

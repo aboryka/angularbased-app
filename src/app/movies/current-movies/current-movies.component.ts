@@ -1,4 +1,4 @@
-import { MoviesService } from './../services/movies.service';
+import { MoviesService } from '../../services/movies.service';
 import { Component, OnInit } from "@angular/core";
 
 @Component({
@@ -8,7 +8,6 @@ import { Component, OnInit } from "@angular/core";
   providers: [MoviesService]
 })
 export class CurrentMoviesComponent implements OnInit {
-
   constructor(private moviesService: MoviesService) {
     this.time = new Date();
   }

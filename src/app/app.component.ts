@@ -36,6 +36,6 @@ export class AppComponent {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(["/home"]);
+    this.router.navigate(["/repertuar"]);
   }
 }

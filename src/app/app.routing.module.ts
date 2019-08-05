@@ -1,41 +1,28 @@
+import { MoviesComponent } from './movies/movies.component';
 import { AuthComponent } from './auth/auth.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { MoviesComponent } from "./movies/movies.component";
-import { MovieComponent } from "./movie/movie.component";
-import { HomeComponent } from "./home/home.component";
+import { MoviesRoutingModule } from './movies/movies.routing.module';
+
 
 const appRoutes: Routes = [
   {
-    path: "home",
-    component: HomeComponent
+    path: "repertuar",
+    component: MoviesComponent
   },
   {
-    path: "movies",
-    children: [
-      {
-        path: "",
-        component: MoviesComponent
-      },
-      {
-        path: ":id",
-        component: MovieComponent
-      }
-    ]
-  },
-  {
-    path: "login",
+    path: "logowanie",
     component: AuthComponent
   },
   {
     path: "",
-    redirectTo: "/home",
+    redirectTo: "/repertuar",
     pathMatch: "full"
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [MoviesRoutingModule, RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
