@@ -1,18 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
-import { WatchListComponent } from './index';
+import { ToWatchListComponent, ToWatchComponent } from './index';
 
 @NgModule({
   declarations: [
-    WatchListComponent
+    ToWatchListComponent, ToWatchComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    WatchListComponent
+    ToWatchComponent, ToWatchListComponent
   ]
 })
-export class WatchListModule {
+export class ToWatchModule {
 
 }

@@ -1,0 +1,6 @@
+<div *ngIf="moviesToWatch.length > 0">
+  <div class="m-1 d-flex justify-content-between" *ngFor="let movie of moviesToWatch">
+    <span class="d-inline-block w-50">{{movie.text}}</span>
+    <button class="btn btn-danger w-50 mx-1" (click)="removeFromWatchList(movie.key)">Usuń z listy</button>
+  </div>
+</div>

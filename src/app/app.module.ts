@@ -1,4 +1,4 @@
-import { WatchListModule } from './watch-list/watch-list.module';
+import { ToWatchModule } from './to-watch/to-watch.module';
 import { MoviesModule } from './movies/movies.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './services/auth.service';
@@ -37,7 +37,7 @@ const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AuthModule,
-    WatchListModule
+    ToWatchModule
   ],
   providers: [MoviesService, MovieService, AuthService],
   bootstrap: [AppComponent]

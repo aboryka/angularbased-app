@@ -1,0 +1,13 @@
+.c-menu__button--custom {
+  background-color: transparent;
+  color: #fff;
+  border-radius: 3px;
+  border: 1px solid #ebebeb;
+
+  &:hover{
+    text-decoration: none;
+    border: 1px solid #fff;
+    color: #ebebeb;
+    transition: 0.2s all ease-in-out;
+  }
+}

@@ -1,5 +1,6 @@
+import { Subscription } from 'rxjs';
 import { MoviesService } from "../../services/movies.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Router } from "@angular/router";
 import { User } from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
@@ -9,27 +10,24 @@ import { AngularFireAuth } from "@angular/fire/auth";
   templateUrl: "./movies-list.component.html",
   styleUrls: ["./movies-list.component.scss"]
 })
-export class MoviesListComponent implements OnInit {
+export class MoviesListComponent implements OnInit, OnDestroy {
+
   movies: Array<any>;
   tooltipClicked: Array<boolean>;
   user: User;
+  subscription: Subscription;
 
-  constructor(
-    private moviesService: MoviesService,
-    private router: Router,
-    private angularFire: AngularFireAuth
-  ) {
+  constructor(private moviesService: MoviesService, private router: Router, private angularFire: AngularFireAuth) {
     this.movies = this.moviesService.getMovies();
+    this.tooltipClicked = new Array(this.movies.length);
 
-    angularFire.authState.subscribe(user => {
+    this.subscription = angularFire.authState.subscribe(user => {
       this.user = user;
-
-      this.tooltipClicked = new Array(this.movies.length);
     });
   }
+
   ngOnInit() {
     this.moviesService.sortByTime();
-
   }
 
   addToWatchList(movie: string, elemIndex: number): void {
@@ -54,5 +52,9 @@ export class MoviesListComponent implements OnInit {
 
   showDetails(id: string): void {
     this.router.navigate(["/movies", id]);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
