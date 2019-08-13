@@ -4,7 +4,16 @@ import { NgModule } from "@angular/core";
 
 const moviesRoutes: Routes = [
   {
-    path: "movies",
+    path: "",
+    redirectTo: "/repertuar",
+    pathMatch: "full"
+  },
+  {
+    path: "repertuar",
+    component: MoviesComponent
+  },
+  {
+    path: "repertuar",
     children: [
       {
         path: "",
@@ -14,6 +23,7 @@ const moviesRoutes: Routes = [
         path: ":id",
         component: MovieDetailComponent
       }
+
     ]
   }
 ];
