@@ -35,11 +35,6 @@ export class ToWatchComponent implements OnInit, OnDestroy {
 
     });
   }
-  ngOnInit(): void {
-    console.log(this.user)
-
-  }
-
-
+  ngOnInit(): void {}
 
 }
