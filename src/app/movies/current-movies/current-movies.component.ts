@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MoviesService } from '../../services/movies.service';
 import { Component, OnInit } from "@angular/core";
 
@@ -8,18 +9,22 @@ import { Component, OnInit } from "@angular/core";
   providers: [MoviesService]
 })
 export class CurrentMoviesComponent implements OnInit {
-  constructor(private moviesService: MoviesService) {
+  constructor(private moviesService: MoviesService, private router: Router) {
     this.time = new Date();
   }
 
   time: Date;
   currentMovies: Array<any>;
-
   avail: Array<any> = [];
 
   ngOnInit(): void {
     this.moviesService.sortByTime();
     this.checkmoviesAvailability();
+  }
+
+  seatReservation(movieId: number, movieTime: string): void {
+    const [hours, minutes] = movieTime.split(":");
+    this.router.navigate(["/sala-kinowa"], {queryParams: { id: movieId, hours: hours, minutes: minutes}});
   }
 
   checkmoviesAvailability(): Array<any> {
@@ -56,4 +61,5 @@ export class CurrentMoviesComponent implements OnInit {
 
     return currentTime;
   }
+
 }

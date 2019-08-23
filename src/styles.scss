@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+$orangeColor: #ffa500;
+$orangeColorHover: #ffb732;
+
+$darkGrayColor: #212529;
+$darkGrayHoverColor: #1d2124;
+$whiteColor: #ffffff;
+$lightGrayColor: #ebebeb;
+$blueColor: #007bff;
+
+
+
 .c-project__header {
   font-size: 20px;
   text-transform: uppercase;
@@ -14,11 +26,38 @@
   padding: 10px;
 }
 
+.c-project__button--primary {
+  background-color: $blueColor;
+  color: $whiteColor;
+  min-width: 50px;
+  border-radius: 3px;
+  font-size: 14px;
+  text-align: center;
+}
+
 .c-project__button--custom {
-  background: #ffa500;
+  cursor: pointer;
+  background: $orangeColor;
   color: #ffffff;
 }
 
 .c-project__text--custom {
-  color: #ffa500;
+  color: $orangeColor;
+}
+
+.c-project__reservations {
+  height: 100px;
+  width: 100%;
+  background-color: $darkGrayColor;
+  color: $whiteColor;
+  font-size: 18px;
+  line-height: 90px;
+  cursor: pointer;
+  text-align: center;
+
+  &:hover {
+    color: $lightGrayColor;
+    background-color: $darkGrayHoverColor;
+    transition: 0.2s all ease-in-out;
+  }
 }

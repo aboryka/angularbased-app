@@ -54,6 +54,7 @@ export class MoviesListComponent implements OnInit, OnDestroy {
     this.router.navigate(["/repertuar", id]);
   }
 
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
