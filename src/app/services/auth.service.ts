@@ -9,16 +9,14 @@ import { Subscription } from 'rxjs';
 })
 export class AuthService {
 
-  user: User;
   loginErr: string;
   registerErr: string;
-  subsAuth: Subscription;
-  authState: any;
+  user: User;
 
   constructor(private angularFire: AngularFireAuth, private router: Router) {
-    this.subsAuth = angularFire.authState.subscribe(user => {
+    this.angularFire.authState.subscribe(user => {
       this.user = user;
-    })
+    });
    }
 
   login(email: string, password: string): void {
@@ -48,6 +46,10 @@ export class AuthService {
   }
 
   logout(): void {
-    this.angularFire.auth.signOut();
+    this.angularFire.auth.signOut().then(user => {
+      this.router.navigate(["/repertuar"]);
+    }).catch(err => {
+      console.log(err);
+    });
   }
 }

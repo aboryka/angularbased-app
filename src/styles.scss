@@ -61,3 +61,40 @@ $blueColor: #007bff;
     transition: 0.2s all ease-in-out;
   }
 }
+
+.c-project__tooltip {
+  position: absolute;
+  z-index: -1;
+  bottom: 60px;
+  right: 15px;
+  left: 10px;
+  text-align: center;
+  margin-left: 5px;
+  min-width: 200px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #343a40;
+  color: #ffffff;
+  opacity: 0;
+  transition: all 0.5s;
+
+  @media (min-width: 576px) {
+    left: inherit;
+  }
+
+}
+
+.c-project__tooltip--active {
+  opacity: 1;
+  z-index: 1;
+  transition: all 0.5s;
+}
+
+.c-project__tooltip--close{
+  cursor: pointer;
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 20px;
+  color: #343a40;
+}

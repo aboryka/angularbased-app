@@ -1,4 +1,7 @@
-import { ToWatchModule } from './to-watch/to-watch.module';
+import { CinemaHallModule } from './cinema-hall/cinema-hall.module';
+import { CurrentMoviesModule } from './current-movies/current-movies.module';
+import { MoviesListModule } from './movies-list/movies-list.module';
+import { MoviesToWatchListModule } from './movies-to-watch-list/movies-to-watch-list.module';
 import { MoviesModule } from './movies/movies.module';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './services/auth.service';
@@ -29,7 +32,10 @@ const firebaseConfig = {
     AppComponent
   ],
   imports: [
-    MoviesModule,
+    CurrentMoviesModule,
+    MoviesToWatchListModule,
+    MoviesListModule,
+    CinemaHallModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -37,7 +43,7 @@ const firebaseConfig = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AuthModule,
-    ToWatchModule
+    MoviesModule
   ],
   providers: [MoviesService, MovieService, AuthService],
   bootstrap: [AppComponent]
