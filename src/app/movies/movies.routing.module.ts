@@ -1,5 +1,4 @@
-import { CinemaHallComponent } from './movies-to-book/cinema-hall/cinema-hall.component';
-import { MoviesComponent, MovieDetailComponent } from "./index";
+import { MoviesComponent, MovieComponent } from "./index";
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 
@@ -18,13 +17,9 @@ const moviesRoutes: Routes = [
       },
       {
         path: ":id",
-        component: MovieDetailComponent
+        component: MovieComponent
       }
     ]
-  },
-  {
-    path: "sala-kinowa",
-    component: CinemaHallComponent
   }
 ];
 

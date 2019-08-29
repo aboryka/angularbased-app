@@ -22,10 +22,10 @@
             <button class="btn btn-success p-1 mx-1 c-movies__button--add" (click)="addToWatchList(movie.title, i)">
               Dodaj do obejrzenia
             </button>
-            <span class="c-movies__tooltip" *ngIf="!user">Zaloguj się, aby dodawać filmy do swojej listy.
-              <span class="c-movies__tooltip--close" (click)="watchListTooltip(i)">x</span></span>
-            <span class="c-movies__tooltip" *ngIf="user">Film dodano do listy<span class="c-movies__tooltip--close"
-                (click)="watchListTooltip(i)">x</span></span>
+            <span class="c-project__tooltip" *ngIf="!authService.user">Zaloguj się, aby dodawać filmy do swojej listy.
+              <span class="c-project__tooltip--close" (click)="closeTooltip(i)">x</span></span>
+            <span class="c-project__tooltip" *ngIf="authService.user">Film dodano do listy<span class="c-project__tooltip--close"
+                (click)="closeTooltip(i)">x</span></span>
           </div>
         </div>
       </div>

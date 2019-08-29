@@ -1,0 +1,13 @@
+.c-movies__element{
+  position: relative;
+  padding: 10px;
+
+  &:nth-child(2n+1) {
+    background-color: #f8f9fa;
+  }
+
+  &:nth-child(2n){
+    background-color: #ebebeb;
+  }
+}
+
