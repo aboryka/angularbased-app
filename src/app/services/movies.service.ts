@@ -9,16 +9,16 @@ import { map } from 'rxjs/operators';
   providedIn: "root"
 })
 export class MoviesService {
-  constructor(private db: AngularFireDatabase, private angularFire: AngularFireAuth) {
-    this.sortByName();
-    angularFire.authState.subscribe(user => {
-      this.user = user;
-
-      if (user) {
-        this.moviesToWatchConfig();
-      }
-    });
-  }
+  user: User;
+  currentDate: Date;
+  reservationDate: string;
+  moviesToWatchObs: Observable<any[]>;
+  userReservationsObs: Observable<any[]>;
+  globalReservationsObs: Observable<any[]>;
+  moviesRef: AngularFireList<any> = null;
+  userReservationsRef: AngularFireList<any> = null;
+  globalReservationsRef: AngularFireList<any> = null;
+  tooltipClicked: Array<boolean>;
 
   private movies: Array<any> = [
     {
@@ -109,9 +109,19 @@ export class MoviesService {
     }
   ];
 
-  user: User;
-  moviesToWatchObs: Observable<any[]>
-  moviesRef: AngularFireList<any> = null;
+  constructor(private db: AngularFireDatabase, private angularFire: AngularFireAuth) {
+    this.sortByName();
+    this.currentDate = new Date();
+    this.reservationDate = this.currentDate.getDate() + ' ' + this.currentDate.toUTCString().split(' ')[2] + ' ' + this.currentDate.getFullYear();
+    angularFire.authState.subscribe(user => {
+      this.user = user;
+
+      if (user) {
+        this.moviesToWatchConfig();
+      }
+    });
+  }
+
 
   sortByName(): void {
     this.movies.sort((a, b) => {
@@ -137,13 +147,43 @@ export class MoviesService {
     }
   }
 
+
+  globalReservationsConfig(reservationTime: string, movie: string){
+    this.globalReservationsRef = this.db.list(`reservations/movies/${movie}/"${this.reservationDate}"/${reservationTime}`);
+
+    this.globalReservationsObs = this.globalReservationsRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, text: c.payload.val() }))
+      )
+    );
+  }
+
+  userReservationsConfig(reservationTime: string, movie: string){
+    this.userReservationsRef = this.db.list(`reservations/${this.user.uid}/${movie}/"${this.reservationDate}"/${reservationTime}`);
+
+    this.userReservationsObs = this.userReservationsRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, text: c.payload.val() }))
+      )
+    );
+  }
+
+
+  addReservation(columns: number, rows: number): void {
+    this.userReservationsRef.push(columns + ' ' + rows);
+    this.globalReservationsRef.push(columns + ' ' + rows);
+  }
+
+
   moviesToWatchConfig(): void {
     this.moviesRef = this.db.list(`movies/${this.user.uid}`);
+
     this.moviesToWatchObs = this.moviesRef.snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, text: c.payload.val() }))
       )
     );
+
   }
 
   addToWatchList(movie: string): void {
@@ -171,5 +211,16 @@ export class MoviesService {
 
   getMovies(): Array<any> {
     return this.movies;
+  }
+
+  customTooltip(elemIndex: number): void {
+    this.tooltipClicked[elemIndex] = !this.tooltipClicked[elemIndex] ;
+    const tooltip = <HTMLElement>(
+      document.getElementsByClassName("c-project__tooltip")[elemIndex]
+    );
+
+    setTimeout(() => {
+      tooltip.classList.toggle("c-project__tooltip--active");
+    }, 100);
   }
 }

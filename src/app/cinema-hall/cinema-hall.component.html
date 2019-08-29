@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div *ngIf="movie && checkIfMovieTimeIsCorrect()" class="c-cinema-hall mb-4 pb-4">
+        <h2 class="c-project__header">Rezerwacje miejsc</h2>
+        <div class="c-cinema-hall__movie my-2">
+          <div class="c-cinema-hall__movie--name">{{ movie.title }}</div>
+          <div class="c-cinema-hall__movie--date">Data seansu: {{ currentDate | date:'dd.MM.yyyy' }} </div>
+          <div class="c-cinema-hall__movie--time">Godzina seansu: {{ movieTime }}</div>
+        </div>
+
+        <div class="c-cinema-hall__screen">Ekran</div>
+        <div class="c-cinema-hall__grid">
+          <div class="c-cinema-hall__seats">
+            <div class="d-flex align-items-center" *ngFor="let n of hallArr; let i = index">
+              <div class="c-cinema-hall__row">
+                <span class="c-cinema-hall__row--number">{{ i + 1 }}</span>
+                <span *ngFor="let m of n; let j = index"
+                  class="c-cinema-hall__seat c-cinema-hall__seat--{{hallArr[i][j]}}"
+                  (click)="selectSeats(i, j)">{{ j + 1  }}
+                </span>
+                <span class="c-cinema-hall__row--number">{{ i + 1  }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="c-cinema-hall__info pb-2">
+          <div class="d-inline-block ml-2">
+            <span class="c-cinema-hall__seat c-cinema-hall__seat--available">1</span>
+            <span>Miejsce wolne</span>
+          </div>
+          <div class="d-inline-block ml-2">
+            <span class="c-cinema-hall__seat c-cinema-hall__seat--reserved">7</span>
+            <span>Miejsce zajęte</span>
+          </div>
+          <div class="d-inline-block ml-2">
+            <span class="c-cinema-hall__seat c-cinema-hall__seat--selected">14</span>
+            <span>Miejsce wybrane</span>
+          </div>
+        </div>
+        <div class="c-cinema-hall__reservation pt-2 d-flex justify-content-between align-items-center">
+          <div class="c-cinema-hall__reservation--counter">Ilość wybranych miejsc: {{ selectedSeats }}</div>
+          <button class="c-cinema-hall__reservation--button btn btn-success"
+            (click)="seatReservation()">Zarezerwuj</button>
+          <span *ngIf="!authService.user" class="c-project__tooltip">Rezerwacja miejsc możliwa tylko dla zalogowanych użytkowników.
+            <span class="c-project__tooltip--close" (click)="triggerTooltip()">x</span></span>
+            <span *ngIf="authService.user" class="c-project__tooltip">Wybrane miejsca zostały zarezerwowane.
+              <span class="c-project__tooltip--close" (click)="triggerTooltip()">x</span></span>
+        </div>
+
+      </div>
+
+      <div *ngIf="!movie" class="alert alert-danger">
+        Nie wybrano żadnego z dostępnych filmów.
+      </div>
+
+      <div *ngIf="!checkIfMovieTimeIsCorrect() && movie" class="alert alert-danger">
+        Nie wybrano poprawnej godziny seansu dla filmu: {{ movie.title }}.
+      </div>
+    </div>
+  </div>
+</div>

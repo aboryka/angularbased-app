@@ -1,0 +1,83 @@
+@import '../../styles.scss';
+
+.c-cinema-hall{
+ width: 100%;
+}
+
+.c-cinema-hall__grid{
+  width: inherit;
+  overflow-x: scroll;
+}
+
+.c-cinema-hall__seats{
+  background-color: $lightGrayColor;
+  margin: 0 auto;
+  padding: 20px;
+  width: 680px;
+  text-align: center;
+}
+
+.c-cinema-hall__seat{
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.c-cinema-hall__reservation{
+  position: relative;
+}
+
+.c-cinema-hall__seat--available {
+  background-color: $orangeColor;
+
+  &:hover {
+    background-color: $orangeColorHover;
+  }
+}
+
+.c-cinema-hall__seat--selected {
+  background-color: $blueColor;
+  color: $whiteColor;
+}
+
+.c-cinema-hall__seat--reserved {
+  pointer-events: none;
+  background-color: $darkGrayColor;
+  color: $whiteColor;
+}
+
+.c-cinema-hall__row{
+  margin: 0 10px;
+}
+
+.c-cinema-hall__screen {
+  background-color: $darkGrayColor;
+  color: $whiteColor;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.c-cinema-hall__info{
+  margin-top: 20px;
+  border-bottom: 1px solid $lightGrayColor;
+}
+
+.c-cinema-hall__info--counter{
+  border-top: 1px solid $lightGrayColor;
+  padding-top: 10px;
+  padding-left: 15px;
+  margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+  .c-cinema-hall__grid{
+    overflow: auto;
+  }
+ }
